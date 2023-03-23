@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
     
-<!-- Mirrored from wpthemebooster.com/demo/themeforest/html/hungrybuzz/light/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 19:10:43 GMT -->
 <head>
         <!-- Meta Tags -->
         <meta charset="utf-8">
@@ -11,7 +10,7 @@
         <meta name="author" content="">
 
         <!-- Page Title -->
-        <title>Hungrybuzz - Restaurant Template</title>
+        <title>Flame Restaurant</title>
 
         <!-- Favicon and touch Icons -->
         <link href="../assets/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -55,7 +54,9 @@
 											<li class="totalvalue">Total <span class="value">$374</span></li>
 										</ul>
 										<div class="button_group">
-											<input class="button" type="submit" value="Checkout" name="submit">
+                                            <a href="checkout.html">
+												<input class="button" type="submit" value="Checkout" name="submit">
+											</a>
 										</div>
 									</div>
 								</div>
@@ -63,54 +64,23 @@
 						</div>
 
 						<div class="logo">
-							<a href="index-2.html"><img src="../assets/images/logo.svg" alt="logo"></a>
+							<a href="index2.html"><img src="../assets/images/logo copy2.png" alt="logo"></a>
 						</div>
 						
 						<div class="mainnav">
 							<ul class="main_menu">
-								<li class="menu-item menu-item-has-children"><a href="index-2.html">Home</a>
-									<ul class="sub-menu">
-										<li class="menu-item"><a href="index2.html">Home 2</a></li>
-									</ul>
+								<li class="menu-item menu-item-has-children"><a href="index2.html">Home</a>
 								</li>
 								<li class="menu-item"><a href="about.html">About</a></li>
-								<li class="menu-item menu-item-has-children"><a href="#">Menu</a>
-									<ul class="sub-menu">
-										<li class="menu-item"><a href="menu1.html">Menu 1</a></li>
-										<li class="menu-item"><a href="menu2.html">Menu 2</a></li>
-										<li class="menu-item"><a href="menu3.html">Menu 3</a></li>
-									</ul>
+								<li class="menu-item menu-item-has-children"><a href="menu2.html">Menu</a>
 								</li>
 								<li class="menu-item"><a href="team.html">Team</a></li>
-								<li class="menu-item logo-item"><a href="index-2.html"><img src="../assets/images/logo.svg" alt="logo"></a></li>
-								<li class="menu-item"><a href="gallery.html">Gallery</a></li>
-								<li class="menu-item menu-item-has-children active"><a href="#">Shop</a>
-									<ul class="sub-menu">
-										<li class="menu-item menu-item-has-children"><a href="#">Grid</a>
-											<ul class="sub-menu">
-												<li class="menu-item"><a href="shop-3col.html">3 Columns</a></li>
-												<li class="menu-item"><a href="shop-4col.html">4 Columns</a></li>
-											</ul>
-										</li>
-										<li class="menu-item"><a href="single-product.html">Single Product</a></li>
-										<li class="menu-item"><a href="cart.html">Cart</a></li>
-										<li class="menu-item active"><a href="checkout.html">Checkout</a></li>
-									</ul>
+								<li class="menu-item logo-item"><a href="index2.html"><img src="../assets/images/logo copy2.png" alt="logo"></a></li>
+								<li class="menu-item menu-item-has-children active"><a href="shop-4col.html">Shop</a>
 								</li>
-								<li class="menu-item menu-item-has-children"><a href="#">Blog</a>
-									<ul class="sub-menu">
-										<li class="menu-item"><a href="blog-standard.html">Standard</a></li>
-										<li class="menu-item"><a href="blog-classic.html">Classic</a></li>
-										<li class="menu-item"><a href="blog-grid.html">Grid</a></li>
-										<li class="menu-item"><a href="blog-details.html">Details</a></li>
-										<li class="menu-item"><a href="blog-details-with-sidebar.html">Details With Sidebar</a></li>
-									</ul>
+								<li class="menu-item menu-item-has-children"><a href="blog-classic.html">Blog</a>
 								</li>
-								<li class="menu-item menu-item-has-children"><a href="#">Contact</a>
-									<ul class="sub-menu">
-										<li class="menu-item"><a href="contact1.html">Contact 1</a></li>
-										<li class="menu-item"><a href="contact2.html">Contact 2</a></li>
-									</ul>
+								<li class="menu-item menu-item-has-children"><a href="contact2.html">Contact</a>
 								</li>
 							</ul>
 						</div>
@@ -144,7 +114,7 @@
 					<img src="../assets/images/title_border.png" alt="">
 					<h2 class="section_title">Reserve Table</h2>
 				</div>
-				<form class="reserve_form" action="https://wpthemebooster.com/demo/themeforest/html/hungrybuzz/light/contact.php" method="post">
+				<form class="reserve_form"  method="post">
 					<div class="form-container">
 						<div class="form-group">
 							<label for="name">Your Name</label>
@@ -157,10 +127,6 @@
 						<div class="form-group">
 							<label for="date">Date</label>
 							<input type="date" id="date" name="date" class="form-control" required="">
-						</div>
-						<div class="form-group">
-							<label for="time">Time</label>
-							<input type="time" id="time" name="time" class="form-control" required="">
 						</div>
 						<div class="button_group">
 							<input class="button" type="submit" value="Reserve A Table" name="submit">
@@ -184,24 +150,7 @@
             <div class="shopping_cart">
                 <div class="container">
                     <div class="shipping_form">
-                        <div class="shipping_couponcart">
-                            <div class="opencoupon">
-                                <div class="text">Coupon Code</div>
-                                <div class="button_group">
-                                    <a class="button" href="#">Click Here to Apply Coupon</a>
-                                </div>
-                            </div>
-                            <form class="couponform" action="https://wpthemebooster.com/demo/themeforest/html/hungrybuzz/light/coupon.php" method="POST">
-                                <div class="form-group">
-                                    <label for="coupon">It you have a coupon code, please apply it below</label>
-                                    <input type="text" class="form-control" id="coupon" name="coupon" placeholder="Coupon Code">
-                                </div>
-                                <div class="button_group">
-                                    <input class="button" type="submit" value="Apply Coupon" name="submit">
-                                </div>
-                            </form>
-                        </div>
-                        <form action="https://wpthemebooster.com/demo/themeforest/html/hungrybuzz/light/shipping.php" method="POST">
+                        <form  method="POST">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="label_shipping">
@@ -228,11 +177,11 @@
                                     <div class="form-group">
                                         <label for="country">Country*</label>
                                         <select class="select_dropdown_value" id="country">
-                                            <option value="1">United States of America</option>
-                                            <option value="2">Country 2</option>
-                                            <option value="3">Country 3</option>
-                                            <option value="4">Country 4</option>
-                                            <option value="5">Country 5</option>
+                                            <option value="1">Azerbaijan</option>
+                                            <option value="2">USA</option>
+                                            <option value="3">Turkey</option>
+                                            <option value="4">Russian</option>
+                                            <option value="5">Israel</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -242,20 +191,16 @@
                                     <div class="form-group">
                                         <label for="city">Town / City*</label>
                                         <select class="select_dropdown_value" id="city">
-                                            <option value="1">New York</option>
-                                            <option value="2">Washington DC</option>
-                                            <option value="3">New Jersey</option>
-                                            <option value="4">Alska</option>
-                                            <option value="5">Arizona</option>
+                                            <option value="1">Baku</option>
+                                            <option value="2">New York</option>
+                                            <option value="3">Istanbul</option>
+                                            <option value="4">Moscow</option>
+                                            <option value="5">Tel Aviv</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="district">District</label>
                                         <input type="text" class="form-control" id="district" name="district" placeholder="House No & Street Name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="zip">Postcode / Zip</label>
-                                        <input type="text" class="form-control" id="zip" name="zip" placeholder="House No & Street Name">
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone*</label>
@@ -292,19 +237,24 @@
                                     
                                     <div class="check_payment_group">
                                         <div class="check_payment">
-                                            <label class="radio_circle">Check Payments
+                                            <label class="radio_circle">Cash
                                                 <input type="radio" checked="checked" name="paymethod" value="cash">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <p class="payment_message">Please send a check to Store Name, Store Street, Store Town, Store State/ Country, Store Postcode.</p>
                                         </div>
+                                        
                                         <div class="check_payment paytype">
-                                            <label class="radio_circle">PayPal
+                                            <label class="radio_circle">Card
                                                 <input type="radio" name="paymethod" value="card">
                                                 <span class="checkmark"></span>
                                             </label>
-                                            <input type="text" class="form-control" id="paypal" name="paypal" placeholder="">
+                                            <input type="text" class="form-control" id="card" name="card" placeholder="1234-5678-9012-3456">
+                                            <input type="text" class="form-control" placeholder="Full Name">
+                                            <input type="text" class="form-control" placeholder="Expiration (mm/yy)">
+                                            <input type="text" class="form-control" placeholder="CVV">
                                         </div>
+                                        
                                         <div class="check_payment">
                                             <p>Your personal data will be used to process your order, support your experience throughout this website and for other
                                                     porposes described in our privacy policy.</p>
@@ -356,17 +306,15 @@
                         <div class="col-lg-4 col-sm-6">
                             <div class="footer_widget center_widget">
                                 <div class="logo_footer">
-									<a href="index-2.html">
-										<img src="../assets/images/logo2.svg" alt="hungrybuzz">
+									<a href="index2.html">
+										<img src="../assets/images/logo copy2.png" alt="">
 									</a>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisc
 										do eiusmod tempor incididunt</p>
 								</div>
 								<div class="footer_social">
 									<ul class="bottom_social">
-										<li class="facebook"><a href="#"><span>FB</span> Facebook</a></li>
-										<li class="instagram"><a href="#"><span>IN</span> Instagram</a></li>
-										<li class="youtube"><a href="#"><span>YT</span> YouTube</a></li>
+										<li class="instagram"><a href="https://www.instagram.com/mammadli_999/"><span>IN</span> Instagram</a></li>
 									</ul>
 								</div>
                             </div>
@@ -427,5 +375,4 @@
         
     </body>
 
-<!-- Mirrored from wpthemebooster.com/demo/themeforest/html/hungrybuzz/light/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Feb 2023 19:10:43 GMT -->
 </html>
