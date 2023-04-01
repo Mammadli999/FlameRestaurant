@@ -1,0 +1,455 @@
+﻿<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Page Title -->
+    <title>Flame Restaurant</title>
+
+    <!-- Favicon and touch Icons -->
+    <link href="~/images/favicon.png" rel="shortcut icon" type="image/png">
+    <link href="~/images/apple-touch-icon.html" rel="apple-touch-icon">
+    <link href="~/images/apple-touch-icon-72x72.html" rel="apple-touch-icon" sizes="72x72">
+    <link href="~/images/apple-touch-icon-114x114.html" rel="apple-touch-icon" sizes="114x114">
+    <link href="~/images/apple-touch-icon-144x144.html" rel="apple-touch-icon" sizes="144x144">
+    <link href="~/css/login.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css">
+    <link href="~/css/rate.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/d2b183de45.js"
+            crossorigin="anonymous"></script>
+    @RenderSection("addcss", required:false)
+</head>
+
+<body class="light_bg">
+
+    <div id="preloader" class="loader_show">
+        <div class="loader-wrap">
+            <div class="loader">
+                <div class="loader-inner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- pointer start -->
+    <div class="pointer bnz-pointer" id="bnz-pointer"></div>
+
+    <!-- Header 2 -->
+    <header class="header header_type4">
+        <div class="top_bar">
+            <div class="container-fluid">
+                <div class="top_bar_inner">
+
+                    <div class="nav_more_info">
+                        <div class="element">
+                            <a asp-controller="products" asp-action="basket"><i class="icon-basket"></i></a>
+                            @*<a asp-controller="products" asp-action="wishlist" class="wishlist_icon"><i class="icon-heart"></i></a>*@
+                        </div>
+                    </div>
+
+                    <div class="logo">
+                        <a asp-controller="home" asp-action="index"><img src="~/images/logo copy2.png" alt="logo"></a>
+                    </div>
+
+                    <div class="mainnav">
+                        <ul class="main_menu">
+                            <li class="menu-item menu-item-has-children">
+                                <a asp-controller="home" asp-action="index">Home</a> 
+                            </li>
+                            <li class="menu-item"><a asp-controller="home" asp-action="about">About</a></li>
+                            <li class="menu-item menu-item-has-children">
+                                <a asp-controller="home" asp-action="menu">Menu</a>
+                            </li>
+                            <li class="menu-item"><a asp-controller="home" asp-action="team">Team</a></li>
+                            <li class="menu-item logo-item"><a asp-controller="home" asp-action="index"><img src="~/images/logo copy2.png" alt="logo"></a></li>
+                            <li class="menu-item menu-item-has-children">
+                                <a asp-controller="products" asp-action="index">Shop</a>
+                            </li>
+                            <li class="menu-item menu-item-has-children">
+                                <a asp-controller="blogposts" asp-action="index">Blog</a>
+                            </li>
+                            <li class="menu-item menu-item-has-children"><a asp-controller="home" asp-action="contact">Contact</a></li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                <li class="menu-item menu-item-has-children" style="margin-left: 25px;">
+                                    <i class="fas fa-thin fa-user"></i>
+                                    <em>@User.GetPrincipalName()</em>
+                                </li>
+                                <li class="menu-item menu-item-has-children" style="margin-left: 90px;">
+                                    <em><a asp-controller="account" asp-action="logout">Exit</a></em>
+                                </li>
+                                }
+                                else
+                                {
+
+                                <li class="menu-item menu-item-has-children" style="margin-left: 90px;"><a asp-controller="account" asp-action="signin">Login</a></li>
+                                }
+                        </ul>
+                    </div>
+
+                    <!-- Reservation Popup -->
+                    <div class="reserve_button_group reserve_btn_popup d-none d-sm-block">
+                        <a class="button" href="#">
+                            <span class="btn_line"></span>
+                            <span class="btn_line"></span>
+                            <span class="btn_line"></span>
+                        </a>
+                    </div>
+
+                    <div class="header_toggle d-xl-none">
+                        <!-- mobile menu toggle button -->
+                        <button class="ma5menu__toggle" type="button">
+                            <span class="toggle_line"></span>
+                            <span class="toggle_line"></span>
+                            <span class="toggle_line"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="reserve_table_popup dark">
+        <span class="popup_close"><i class="ion-ios-close-empty"></i></span>
+        <div class="table_reserve_form">
+            <div class="section_header">
+                <img src="~/images/title_border.png" alt="">
+                <h2 class="section_title">Reserve Table</h2>
+            </div>
+            <form class="reserve_form" method="post" asp-controller="home" asp-action="CreateReservation">
+                <div asp-validation-summary="All"></div>
+                <div class="form-container">
+                    @await Html.PartialAsync("_ReservationForm", new ReservationPostCommand())
+
+                    <div class="button_group">
+                        <button class="button" type="submit">Reserve A Table</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <footer class="footer">
+        <div class="footer_above">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="footer_widget">
+                            <h5 class="widget_title">Latest News</h5>
+                            <ul class="most_read">
+                                <li class="most_read_item">
+                                    <div class="most_read_content">
+                                        <h6>August 06, 2022</h6>
+                                        <h5><a href="#">Bread & Jam Fusion</a></h5>
+                                    </div>
+                                </li>
+                                <li class="most_read_item">
+                                    <div class="most_read_content">
+                                        <h6>August 06, 2022</h6>
+                                        <h5><a href="#">How to start food Blogging</a></h5>
+                                    </div>
+                                </li>
+                                <li class="most_read_item">
+                                    <div class="most_read_content">
+                                        <h6>August 06, 2022</h6>
+                                        <h5><a href="#">15 Amazing Tips to keep food fresh</a></h5>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="footer_widget center_widget">
+                            <div class="logo_footer">
+                                <a href="index2.html">
+                                    <img src="~/images/logo copy2.png" alt="">
+                                </a>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisc
+                                    do eiusmod tempor incididunt
+                                </p>
+                            </div>
+                            <div class="footer_social">
+                                <ul class="bottom_social">
+                                    <li class="instagram"><a href="https://www.instagram.com/mammadli_999/"><span>IN</span> Instagram</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="footer_widget widget_payment">
+                            <h5 class="widget_title">Payment Procedure</h5>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur
+                                mod tempor indidunt ut labore et dolore
+                                magna aliqua.
+                            </p>
+                            <p>Mod tempor indidunt ut labore </p>
+
+                            <div class="paymethod">
+                                <a href="#"><img src="~/images/payment1.svg" alt=""></a>
+                                <a href="#"><img src="~/images/payment2.svg" alt=""></a>
+                                <a href="#"><img src="~/images/payment3.svg" alt=""></a>
+                                <a href="#"><img src="~/images/payment4.svg" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer_bottom">
+            <div class="container">
+                <div class="footer_bottom_inner">
+                    <div class="copyright">
+                        <p> &copy; All rights reserved to <a href="#">Flame Restaurant</a></p>
+                    </div>
+                    <div class="totop">
+                        <a href="#"><i class="ion-ios-arrow-up"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="~/js/vendor/jquery-library.js"></script>
+    <script src="~/js/vendor/bootstrap.min.js"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
+    <script src="~/js/parallax.js"></script>
+    <script src="~/js/jquery.vide.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
+            integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+
+    @*<script src="~/js/countdown.js"></script>
+        <script src="~/js/jquery-ui.js"></script>
+        <script src="~/js/countTo.js"></script>
+        <script src="~/js/appear.js"></script>
+        <script src="~/js/gmap3.js"></script>
+        <script src="~/lib/jquery.cookie/jquery.cookie.js"></script>
+        <script src="~/js/main.js"></script>
+        <script src="~/lib/toastr.js/toastr.min.js"></script>
+        <script src="~/lib/toastr.js/toastr.customize.js"></script>
+        <script src="~/js/owl.carousel.min.js"></script>
+    *@
+
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+
+    <script src="~/plugins/menu/ma5-menu.min.js"></script>
+    <script src="~/plugins/slick/slick.min.js"></script>
+    <script src="~/plugins/fancybox/jquery.fancybox.min.js"></script>
+
+    <script src="~/plugins/select2/select2.js"></script>
+    <script src="~/plugins/isotope/isotope.pkgd.min.js"></script>
+    <script src="~/plugins/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="~/plugins/isotope/packery-mode.pkgd.js"></script>
+
+    <script src="~/plugins/aos/aos.js"></script>
+    <script src="~/plugins/jarallax/jarallax.min.js"></script>
+
+    <script src="~/js/custom.js"></script>
+    <script>
+        $(window).resize(function () {
+            $('.slider_slick')[0].slick.refresh();
+        });
+    </script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyCUiaBC-cJ0wcEtqCUtoXF3I91o9wS42gQ"></script>
+    <script src="~/js/map.js"></script>
+    <partial name="_BasketScriptsPartial" />
+
+    @RenderSection("addjs",required:false)
+
+    <script>
+        function addToFavorites(productId) {
+            const favorites = ($.cookie('favorites') || '').split(',').filter(item => item.length > 0);
+
+
+            if (favorites.filter(item => item == productId).length == 0) {
+                favorites.push(productId);
+
+                $.cookie('favorites', favorites.toString(), { path: '/', expires: 7 })
+            }
+
+            console.log($.cookie('favorites'));
+        }
+
+        function addToBasket(e) {
+            e.preventDefault();
+
+            const elementData = $(e.currentTarget).data();
+
+            $.ajax({
+                url: `@Url.Action("Basket","Products")`,
+                type: 'POST',
+                data: elementData,
+                contentType: 'application/x-www-form-urlencoded',
+                success: function (response) {
+                    if (response.error == false) {
+                        $(e.target).closest('tr').remove();
+                        toastr.success(response.message, 'Success');
+                        return;
+                    }
+
+
+                    toastr.error(response.message, 'Error');
+                },
+                error: function (response, status, xhr) {
+                    console.log(response, status, xhr);
+                }
+            });
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $.ajaxSetup({
+                statusCode: {
+                    //200: function(response) {
+                    //    if (response.error == false && response.length > 0) {
+                    //        toastr.success(response.message, 'Successful operation!');
+                    //    }
+                    //},
+                    400: function (response) {
+                        toastr.error('Bad request!', "Error!");
+                    },
+                    401: function (response) {
+                        toastr.warning('You must log in before this operation!', "Warning!");
+                        $('#flipFlop').modal('show');
+                    },
+                    403: function (response) {
+                        toastr.warning('You are not authorized for this operation!', "Warning!");
+                    },
+                    404: function (response) {
+                        toastr.warning("Data was not found!", "Warning!");
+                    },
+                    500: function (response) {
+                        toastr.error('Server error has occured!', "Error!");
+                    }
+                }
+            });
+
+            //$('#softLogin').submit(function(e) {
+            //    e.preventDefault();
+
+            //    var formData = new FormData(e.currentTarget);
+            //    $.ajax({
+            //        url: '@Url.Action("Signin","Account", values: new{area=""})',
+            //        type: 'POST',
+            //        data: formData,
+            //        processData: false,
+            //        contentType: false,
+            //        success: function(response) {
+            //            console.log(response);
+            //            if (response.error == false) {
+            //                $('#flipFlop').modal('hide');
+            //            }
+            //        }
+            //    });
+            //})
+
+            $('#newsletter-subscribe').submit(function (ev) {
+                ev.preventDefault();
+
+                let fd = new FormData(ev.currentTarget);
+
+                $.ajax({
+                    url: '@Url.Action("Subscribe","Home")',
+                    type: 'post',
+                    data: fd,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response.error == true) {
+                            toastr.error(response.message, 'Problem!');
+                            return;
+                        }
+
+                        toastr.success(response.message, 'Success!');
+                        ev.currentTarget.reset();
+                    },
+                    error: function (errorResponse) {
+                        console.log(errorResponse, 'Error');
+                    }
+                });
+            });
+
+
+            $('#wish').click(function (ev) {
+                window.location.href = "/Products/Wishlist";
+            })
+
+            $('#basket').click(function (ev) {
+                window.location.href = "/Products/Basket";
+            })
+        });
+    </script>
+
+    @*<!-- The modal -->
+        <div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="modalLabel">Please, login to continue ☺</h4>
+        </div>
+        <div class="modal-body">
+        <form id="softLogin" method="post" class="form validate-form">
+        @if (!string.IsNullOrWhiteSpace(ViewBag.Message))
+        {
+        <div class="form-input">
+        <div class="alert alert-danger">
+        @ViewBag.Message
+        </div>
+        </div>
+        }
+
+        <div class="form-input">
+        <label for="UserName">Username or Email</label>
+        <input name="UserName" class="user-input" />
+        </div>
+        <div class="form-input">
+        <label for="Password">Password</label>
+        <input name="Password"
+        class="user-input"
+        type="password" />
+        </div>
+        <div class="form-btn">
+        <button type="submit" class="tg-btn btn">Sign in</button>
+        </div>
+        <ul class="login-more">
+        <li>
+        <span> Forgot </span>
+        <a href="#"> Username / Password? </a>
+        </li>
+        <li>
+        <span> Don’t have an account? </span>
+        <a asp-controller="account" asp-action="register"> Sign up </a>
+        </li>
+        <li>
+        <a asp-controller="home" asp-action="index"> Continue without sign in </a>
+        </li>
+        </ul>
+        </form>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+        </div>
+        </div>*@
+
+</body>
+</html>

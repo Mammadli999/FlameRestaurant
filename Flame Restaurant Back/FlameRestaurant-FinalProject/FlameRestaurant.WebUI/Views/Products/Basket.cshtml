@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Basket>
+
+@{
+    ViewData["Title"] = "Basket";
+    ViewBag.TotalPrice = @Model.Sum(m => m.Quantity * m.Product.Price);
+}
+
+<div class="page-header">
+    <div class="page-header-content bg_image_header jarallax">
+        <div class="container">
+            <h1 class="heading">Your Basket</h1>
+        </div>
+    </div>
+</div>
+
+<div class="main-wrapper">
+    <div class="shopping_cart light_cart">
+        <div class="container">
+            @if (Model != null && Model.Any())
+            {
+                <form class="couponform" method="POST">
+                    <table class="cart_table">
+                        <tr class="cart_header">
+                            <th class="cart_header_removal"></th>
+                            <th class="cart_header_title">Product</th>
+                            <th class="cart_header_price">Price</th>
+                            <th class="cart_header_quantity">Quantity</th>
+                            <th class="cart_header_total">Total</th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="cart_content">
+                                <td class="cart_removal product-remove">
+
+                                <a onclick="removeFromBasket(this, '@item.Product.Name');return"
+                                           data-product-id="@item.ProductId"
+                                           aria-remove-target=".basket-item-@item.ProductId">
+                                        <i class="ion-ios-close-empty" aria-hidden="true"></i>
+                                                </a>
+                                </td>
+                                <td class="cart_title"><span class="cart_image"><img src="~/uploads/images/@item.Product.ImagePath" alt="@item.Product.Name" /></span> @item.Product.Name</td>
+                                <td class="cart_price amount">@item.Product.Price.ToString("0.00$")</td>
+                                <td class="cart_quantity"><input type="number" data-product-id="@item.ProductId" min="1" onchange="changeQuantity(event,this)" value="@item.Quantity"/></td>
+                                <td class="cart_total product-subtotal">@((item.Product.Price * item.Quantity).ToString("0.00$"))</td>
+                            </tr>
+                        }
+                    </table>
+                    <div class="cart_grand_total">
+                        <h3 class="grand_title">Cart Total</h3>
+                        <ul>
+                            <li class="totalvalue"><span class="cost_per" >Total</span> <span class="value amount" amount" id="summary">@Model.Sum(m=>m.Quantity * m.Product.Price).ToString("0.00₼")</span></li>
+                        </ul>
+                        <div class="button_group">
+                            <a class="button" asp-controller="products" asp-action="index">Continue to shopping</a>
+                        </div>
+                        <div class="button_group">
+                            <a class="button" asp-controller="products" asp-action="checkout" >Payment</a>
+                        </div>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <p>Empty card!</p>
+
+            }
+        </div>
+    </div>
+</div>

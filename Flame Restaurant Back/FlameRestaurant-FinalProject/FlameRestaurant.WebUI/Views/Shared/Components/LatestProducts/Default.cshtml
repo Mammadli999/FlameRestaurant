@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Product>
+
+<div class="blog_grid dark section_sm home_blog">
+				<div class="container">
+					<div class="section_header dark">
+						<img src="~/images/title_back2.png" alt="">
+						<h2 class="section_title">Latest Food</h2>
+						<h6 class="section_sub_title">See Our  food and drinks </h6>
+					</div>
+					<div class="row">
+						@foreach(var item in Model){
+						<div class="col-lg-3 col-md-4">
+							<article class="blog_post">
+								<div class="post_img">
+									<img class="l-img" src="~/uploads/images/@item.ImagePath" alt="blog">
+								</div>
+								<div class="post_content">
+									<div class="post_header">
+										<div class="metalist">
+											<span class="author"><a asp-controller="products" asp-action="details" asp-route-id="@item.Id"> @item.CreatedByUser?.Name @item.CreatedByUser?.Surname</a></span>
+										</div>
+										<h3 class="post_title">
+											<a asp-controller="products" asp-action="details" asp-route-id="@item.Id">@item.Name</a>
+										</h3>
+									</div>
+									<div class="post_intro">
+										<p>  </p>
+									</div>
+									<div class="post_footer">
+										<div class="read_more">
+											<a asp-controller="products" asp-action="details" asp-route-id="@item.Id">See More</a>
+										</div>
+									</div>
+								</div>
+							</article>
+						</div>
+						}
+					</div>
+				</div>
+			</div> 
+

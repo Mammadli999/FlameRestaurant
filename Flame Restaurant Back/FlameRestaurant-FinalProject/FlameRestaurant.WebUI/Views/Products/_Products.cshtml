@@ -1,0 +1,36 @@
+﻿@model PagedViewModel<Product>
+<div class="row">
+    @if (Model.Items.Any())
+    {
+        @foreach (var item in Model.Items)
+        {
+            <div class="col-lg-3 col-md-6">
+                <div class="product_item">
+                    <div class="product_imagebox">
+                        <img class="primary_img productimg" src="~/uploads/images/@item.ImagePath" alt="@item.Name">
+                        <div class="product_item_inner">
+                            <div class="button_group">
+                                <a class="button" onclick="addToBasket(event)" data-product-id="@item.Id">Add to Basket</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="label_text">
+                        <h5 class="product_item_name"><a asp-controller="products" asp-action="details" asp-route-id="@item.Id">@item.Name</a></h5>
+                        <div class="rate center-rate">
+                            <rate rate-value="@item.Rate" rate-product-id="@item.Id"></rate>
+                        </div>
+                        <h6 class="product_item_price">$@item.Price</h6>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+            <p>No product was found!</p>
+        </div>
+    }
+</div>
+
+

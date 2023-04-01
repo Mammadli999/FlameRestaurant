@@ -1,0 +1,205 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="page-header">
+    <div class="page-header-content bg_image_header jarallax">
+        <div class="container">
+            <h1 class="heading">Product</h1>
+        </div>
+    </div>
+</div>
+
+<div class="main-wrapper">
+    <div class="product_view">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product_left">
+                        <div class="product_zoom">
+                            <div class="product_zoom_container">
+                                <div class="product_zoom_info selected">
+                                    <div class="product_image_zoom">
+                                        <img src="~/uploads/images/@Model.ImagePath" alt="@Model.Name">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product_right">
+                        <div class="product_info">
+                            <div class="product_title"><h4>@Model.Name</h4></div>
+                            <div class="product_rating">
+                                <rate rate-value="@Model.Rate" rate-product-id="@Model.Id"></rate>
+                            </div>
+                        </div>
+                        <div class="product_price">
+                            <span class="product_per_price" data-content="@Model.Price"></span> $<span class="product_total_price">@Model.Price</span>
+                        </div>
+                        <div class="product_description">
+                            @Html.Raw(Model.Description)
+                        </div>
+                        <div class="product_view_bottom">
+
+                            <div class="button_group">
+                                <a class="button" onclick="addToBasket(event)" data-product-id="@Model.Id">Add to Cart</a>
+                            </div>
+                        </div>
+
+                        <div class="product_meta">
+                            <ul>
+                                <li><span>SKU:</span> @Model.StockKeepingUnit</li>
+                                <li><span>Category:</span> @Model.Category.Name</li>
+                                <li><span>Tag:</span> @foreach(var item in Model.TagCloud){
+                                        <span>@item.Tag.Text</span>
+                                }</li>
+                            </ul>
+                        </div>
+                        <div class="post_share">
+                            <ul class="share_list">
+                                <li>Share:</li>
+                                <li data-aos="fade-up" data-aos-duration="1000"><a href="#"><i class="ion-social-facebook"></i></a></li>
+                                <li data-aos="fade-up" data-aos-duration="1500"><a href="#"><i class="ion-social-twitter"></i></a></li>
+                                <li data-aos="fade-up" data-aos-duration="2000"><a href="#"><i class="ion-social-dribbble-outline"></i></a></li>
+                                <li data-aos="fade-up" data-aos-duration="2500"><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                                <li data-aos="fade-up" data-aos-duration="3000"><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="single_tab section_sm">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <ul class="single_tab_button_group">
+                        <li class="single_tab_button selected">
+                            <a class="selected" href="#">Description</a>
+                        </li>
+                        <li class="single_tab_button">
+                            <a href="#">Recipe Description</a>
+                        </li>
+                    </ul>
+
+                    <div class="single_tab_container">
+                        <div id="description" class="single_tab_info selected">
+                            <p>
+                                @Html.Raw(Model.Description)
+                            </p>
+                        </div>
+
+                        <div id="recipe" class="single_tab_info">
+                            <p>
+                                @Html.Raw(Model.ReceipeDescription)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Component.InvokeAsync("RelatedProducts", new{categoryName = @Model.Category.Name})
+
+</div>
+
+
+@section addjs{
+    <script>
+        function addToFavorites(productId) {
+            const favorites = ($.cookie('favorites') || '').split(',').filter(item => item.length > 0);
+
+
+            if (favorites.filter(item => item == productId).length == 0) {
+                favorites.push(productId);
+
+                $.cookie('favorites', favorites.toString(), { path: '/', expires: 7 })
+            }
+
+            console.log($.cookie('favorites'));
+        }
+
+        function addToBasket(e) {
+            e.preventDefault();
+
+            const elementData = $(e.currentTarget).data();
+
+            $.ajax({
+                url: `@Url.Action("Basket","Products")`,
+                type: 'POST',
+                data: elementData,
+                contentType: 'application/x-www-form-urlencoded',
+                success: function(response) {
+                    if (response.error == false) {
+                        $(e.target).closest('tr').remove();
+                        toastr.success(response.message, 'Success');
+                        return;
+                    }
+
+
+                    toastr.error(response.message, 'Error');
+                },
+                error: function(response, status, xhr) {
+                    console.log(response, status, xhr);
+                }
+            });
+        }
+
+        $('.rate li').click(function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const data = $(e.currentTarget).data();
+
+            console.log(data);
+
+            $.ajax({
+                url: '@Url.Action("SetProductRate")',
+                type: 'POST',
+                data: data,
+                contentType: 'application/x-www-form-urlencoded',
+                success: function(response) {
+                    location.reload()
+                    console.log(response);
+                },
+                error: function(response) {
+                    console.error(response);
+                }
+            });
+        });
+    </script>
+    <script>
+        const descriptionTab = document.querySelector('.single_tab_button.selected a');
+        const recipeTab = document.querySelector('.single_tab_button:not(.selected) a');
+        const descriptionDiv = document.getElementById('description');
+        const recipeDiv = document.getElementById('recipe');
+
+        descriptionTab.addEventListener('click', function () {
+            if (!descriptionDiv.classList.contains('selected')) {
+                descriptionDiv.classList.add('selected');
+                recipeDiv.classList.remove('selected');
+            }
+        });
+
+        recipeTab.addEventListener('click', function () {
+            if (!recipeDiv.classList.contains('selected')) {
+                recipeDiv.classList.add('selected');
+                descriptionDiv.classList.remove('selected');
+            }
+        });
+    </script>
+
+}
+@section addcss{
+    <style>
+        .c-rate{
+            justify-content:center;
+        }
+    </style>
+}

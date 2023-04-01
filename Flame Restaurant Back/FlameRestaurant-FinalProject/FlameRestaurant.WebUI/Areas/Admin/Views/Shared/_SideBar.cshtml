@@ -1,0 +1,172 @@
+﻿<nav class="pcoded-navbar" >
+    <div class="pcoded-inner-navbar main-menu" >
+        <div class="pcoded-navigatio-lavel">Management</div>
+        <ul class="pcoded-item pcoded-left-item">
+            @*@if (User.HasAccess("admin.dashboard.index"))
+            {
+                <li>
+                    <a asp-controller="dashboard" asp-action="index">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-home"></i>
+                        </span>
+                        <span class="pcoded-mtext">Home Page</span>
+                    </a>
+                </li>
+            }*@
+            @if (User.HasAccess("admin.reservations.index"))
+            {
+                <li>
+                    <a asp-controller="reservations" asp-action="index">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-book"></i>
+                        </span>
+                        <span class="pcoded-mtext">Reservations</span>
+                    </a>
+                </li>
+            }
+            @if (User.HasAccess("admin.categories.index"))
+            {
+                <li>
+                    <a asp-controller="categories" asp-action="index">
+                        <span class="pcoded-micon">
+                            <i class="fa-solid fa-filter"></i>
+                        </span>
+                        <span class="pcoded-mtext">Categories</span>
+                    </a>
+                </li>
+            }
+            @if (User.HasAccess("admin.products.index"))
+            {
+                <li>
+                    <a asp-controller="Products" asp-action="index">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-grid"></i>
+                        </span>
+                        <span class="pcoded-mtext">Product</span>
+                    </a>
+                </li>
+            }
+            @if (User.HasAccess("admin.tags.index"))
+            {
+                <li>
+                    <a asp-controller="tags" asp-action="index">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-tag"></i>
+                        </span>
+                        <span class="pcoded-mtext">Tags</span>
+                    </a>
+                </li>
+            }
+            @if (User.HasAccess("admin.orders.index"))
+            {
+                <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
+                    <a href="javascript:void(0)">
+                        <span class="pcoded-micon"><i class="fa-solid fa-signs-post"></i></span>
+                        <span class="pcoded-mtext">Orders</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li>
+                            <a asp-controller="orders" asp-action="index">
+                                <span class="pcoded-mtext">All orders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="orders" asp-action="CancelledOrders">
+                                <span class="pcoded-mtext">Cancelled orders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="orders" asp-action="DeliveredOrders">
+                                <span class="pcoded-mtext">Delivered orders</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+            @if (User.HasAccess("admin.abouts.index"))
+            {
+                <li>
+                    <a asp-controller="abouts" asp-action="index">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-users"></i>
+                        </span>
+                        <span class="pcoded-mtext">About</span>
+                    </a>
+                </li>
+            }
+            @if (User.HasAccess("admin.blogposts.index"))
+            {
+                <li class="pcoded-hasmenu" dropdown-icon="style1" subitem-icon="style1">
+                    <a href="javascript:void(0)">
+                        <span class="pcoded-micon"><i class="feather icon-inbox"></i></span>
+                        <span class="pcoded-mtext">Forum</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li>
+                            <a asp-controller="blogposts" asp-action="index">
+                                <span class="pcoded-mtext">Shares</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="blogposts" asp-action="DeletedPosts">
+                                <span class="pcoded-mtext">Deleted posts</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+            @if (User.HasAccess("admin.contactposts.index"))
+            {
+                <li>
+                    <a asp-controller="ContactPosts" asp-action="index">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-mail"></i>
+                        </span>
+                        <span class="pcoded-mtext">Contact</span>
+                    </a>
+                </li>
+            }
+            @if (User.HasAccess("admin.teams.index"))
+            {
+                <li>
+                    <a asp-controller="Teams" asp-action="index">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-user"></i>
+                        </span>
+                        <span class="pcoded-mtext">Teams</span>
+                    </a>
+                </li>
+            }
+            
+        </ul>
+            <div class="pcoded-navigatio-lavel">Parametrlər</div>
+            <ul class="pcoded-item pcoded-left-item">
+                @if (User.HasAccess("admin.users.index"))
+                {
+                    <li>
+                        <a asp-controller="users" asp-action="index">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-user"></i>
+                            </span>
+                            <span class="pcoded-mtext">Users</span>
+                        </a>
+                    </li>
+                }
+                @if (User.HasAccess("admin.flamerestaurantroles.index"))
+                {
+                    <li>
+                        <a asp-controller="FlameRestaurantRoles" asp-action="index">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-sliders"></i>
+                            </span>
+                            <span class="pcoded-mtext">Roles</span>
+                        </a>
+                    </li>
+                }
+                
+            </ul>
+        
+    </div>
+</nav>
