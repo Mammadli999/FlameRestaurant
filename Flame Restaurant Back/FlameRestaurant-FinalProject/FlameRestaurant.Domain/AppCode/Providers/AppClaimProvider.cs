@@ -18,6 +18,10 @@ namespace FlameRestaurant.Domain.AppCode.Providers
             this.db = db;
         }
 
+
+
+
+
         public async Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
         {
 

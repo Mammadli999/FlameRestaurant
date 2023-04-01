@@ -21,6 +21,9 @@ namespace FlameRestaurant.WebUI.Areas.Admin.Controllers
         private readonly FlameRestaurantDbContext db;
         private readonly IMediator mediator;
 
+
+
+
         public AboutsController(FlameRestaurantDbContext db, IMediator mediator)
         {
             this.db = db;

@@ -22,6 +22,9 @@ namespace FlameRestaurant.Application.AppCode.Providers
             return null;
         }
     }
+        
+
+
 
     public class BooleanBinder : IModelBinder
     {
